@@ -10,12 +10,10 @@ public class Stack {
 		next = null;
 	}
 	
-	
 	public Stack() {
 		treeNode = null;
 		next = null;
 	}
-
 
 	public static Stack top;
 }

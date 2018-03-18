@@ -44,11 +44,6 @@ public class ExpressionTree {
 			if(isDigit(ch)) {
 				push(data);
 			}else if(isOperator(ch)) {
-//				Node data = new Node(ch);
-//				data.left = pop();
-//				data.right = pop();
-//				push(data);
-				
 				data.right = pop();
 				data.left = pop();
 				push(data);
@@ -71,32 +66,28 @@ public class ExpressionTree {
         return ch - '0';
     }
 	
-	public Node buildTree(char eqn[])
+	public Node buildPostFixTree(char eqn[])
     {
-//        for (int i = eqn.length() - 1; i >= 0; i--)
-//            insert(eqn.charAt(i));
-		Node t, t1, t2;
-		for(int i = 0; i < eqn.length; i++) {
+		Node tree, t1, t2;
+		for(int i= 0; i < eqn.length; i++) {
 			if(!isOperator(eqn[i])) {
-				t = new Node(eqn[i]);
-				push(t);
+				tree = new Node(eqn[i]);
+				push(tree);
 			}else {
-				t = new Node(eqn[i]);
-				
+				tree = new Node(eqn[i]);
 				t1 = pop();
 				t2 = pop();
-				
-				t.right = t1;
-				t.left = t2;
-				
-				push(t);
+				tree.right = t1;
+				tree.left = t2;
+				push(tree);
 			}
 		}
 		
-        t = root();
+        tree = root();
         pop();
-        return t;
+        return tree;
     }
+	
 	
 	public double evaluate() {
 		return evaluate(root());
