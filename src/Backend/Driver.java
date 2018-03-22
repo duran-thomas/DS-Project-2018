@@ -1,22 +1,36 @@
 package Backend;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Driver {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
  
-        ExpressionTree tree = new ExpressionTree();
-        
-        String postfix = ("793/5*+82/-62/5*+");
-		char[] charArray = postfix.toCharArray();
+        ExpressionTree testTree = new ExpressionTree();
+       
+        String postfix = ("-72.5 -92.2 +");
+        //String infix = ("7+9+3");
+        //String postfix = ("5 10 15 - * 7 +");
 		
-		Node root = tree.buildPostFixTree(charArray);
-		tree.inOrder(root);
+        //System.out.println(testTree.infixToPostfix(infix));
+        
+        Node test = testTree.buildPostfixTree(postfix);
+		testTree.inOrder(test);
 		System.out.println("");
-		System.out.println("Result: " + tree.evaluate(root));
+		System.out.printf("Result: %.1f", testTree.evaluate(test));
+		
+		System.out.println("\nMemory Function");
+        
+        Stack<String> mem = new Stack<>();
+        
+        mem = testTree.addToMemory(postfix);
+        
+        System.out.println("View Memory: " + mem);
+        
+        System.out.println("After Memory Clear: " + testTree.clearMemory(mem));
+        testTree.writeToFile(postfix + "\n");
+        
+        
 	}
-
 }

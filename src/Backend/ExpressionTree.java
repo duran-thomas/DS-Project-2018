@@ -1,11 +1,11 @@
 package Backend;
 
-import javax.management.RuntimeErrorException;
-//import java.util.*;
+import java.util.*;
+import java.io.*;
 
 public class ExpressionTree {
 
-	Stack top;
+	TreeStack top;
 	
 	public ExpressionTree() {
 		top = null;
@@ -17,9 +17,9 @@ public class ExpressionTree {
 	
 	public void push(Node nodeVal) {
 		if(top == null) {
-			top = new Stack(nodeVal);
+			top = new TreeStack(nodeVal);
 		}else {
-			Stack temp = new Stack(nodeVal);
+			TreeStack temp = new TreeStack(nodeVal);
 			temp.next = top;
 			top = temp;
 		}
@@ -38,57 +38,21 @@ public class ExpressionTree {
 		return top.treeNode;
 	}
 	
-	public void insert(char ch) {
-		try {
-			Node data = new Node(ch);
-			if(isDigit(ch)) {
-				push(data);
-			}else if(isOperator(ch)) {
-				data.right = pop();
-				data.left = pop();
-				push(data);
-			}
-		} catch (Exception e) {
-			System.out.println("Invalid Expression");
-		}
-	}
-	
 	public boolean isDigit(char ch) {
-        return ch >= '0' && ch <= '9';
+		return ch >= '0' && ch <= '9';
     }
 	
-	public boolean isOperator(char ch) {
-        return ch == '+' || ch == '-' || ch == '*' || ch == '/';
+	public boolean isOperator(String ch) {
+		return ch.equals("+")  || ch.equals("-")  || ch.equals("*")  || ch.equals("/");
     }
 	
-	private int toDigit(char ch)
-    {
-        return ch - '0';
+	private float toDigit(String data)
+	{
+		Float val = Float.parseFloat(data);
+        return val;
     }
 	
-	public Node buildPostFixTree(char eqn[])
-    {
-		Node tree, t1, t2;
-		for(int i= 0; i < eqn.length; i++) {
-			if(!isOperator(eqn[i])) {
-				tree = new Node(eqn[i]);
-				push(tree);
-			}else {
-				tree = new Node(eqn[i]);
-				t1 = pop();
-				t2 = pop();
-				tree.right = t1;
-				tree.left = t2;
-				push(tree);
-			}
-		}
-		
-        tree = root();
-        pop();
-        return tree;
-    }
-	
-	
+
 	public double evaluate() {
 		return evaluate(root());
 	}
@@ -100,16 +64,16 @@ public class ExpressionTree {
 			double result = 0.0;
 			double left = evaluate(val.left);
 			double right = evaluate(val.right);
-			char operator = val.data;
+			String operator = val.data;
 			
 			switch(operator) {
-			case '+' : result = left + right;
+			case "+" : result = left + right;
 				break;
-            case '-' : result = left - right;
+            case "-" : result = left - right;
             	break;
-            case '*' : result = left * right; 
+            case "*" : result = left * right; 
             	break;
-            case '/' : result = left / right; 
+            case "/" : result = left / right; 
             	break;
             default  : result = left + right; 
             	break;
@@ -138,7 +102,7 @@ public class ExpressionTree {
         }    
     }
     
-    private void preOrder(Node val)
+    public void preOrder(Node val)
     {
         if (val != null)
         {
@@ -161,5 +125,157 @@ public class ExpressionTree {
     public void prefix()
     {
         preOrder(root());
+    }
+    
+    public Node buildPostfixTree(String eqn) {
+    	Node tree, t1, t2;
+    	String exrn[] = eqn.split("\\s+");
+    	for(int i=0;i<=exrn.length-1;i++) {
+    		if(isOperator(exrn[i])) {
+    			tree = new Node(exrn[i]);
+    			t1 = pop();
+    			tree.right = t1;
+    			t2 = pop();
+    			tree.left = t2;
+    			push(tree);
+    		}else {
+    			tree = new Node(exrn[i]);
+    			push(tree);
+    		}
+    	}
+    	tree = root();
+    	pop();
+    	return tree;
+    }
+    
+//    public static int precedence(String str) {
+//
+//    	if (str.equals("+") || str.equals("-")) return 1;
+//        else if (str.equals("*") || str.equals("/")) return 2;
+//        else if (str.equals("^")) return 3;
+//        else return 0;
+//    }
+    
+//    public String infixToPostfix(String infix) {
+//    	String postfix = "";
+//    	
+//    	Stack<String> stk = new Stack<>();
+//    	String post[] = infix.split("\\s+");
+//    	for(int i = 0; i<post.length;i++) {
+//    		if(!isOperator(post[i]))
+//    			postfix += post[i];
+//    		else if(post[i].equals("(")) 
+//    			stk.push(post[i]);
+//    		else if {
+//    			while(!stk.isEmpty() && stk.peek() != "(")
+//    				postfix += stk.pop();
+//    			if(!stk.isEmpty() && stk.peek() != "(")
+//    				return "Invalid Expression";
+//    			else
+//    				stk.pop();
+//    		}else {
+//    			while (!stk.isEmpty() && precedence(post[i] <= precedence(stk.peek())))
+//    				postfix += stk.pop();
+//    			stk.push(post[i]);
+//    		}
+//    	}
+//   	
+//    	return postfix;
+//    }
+    
+//    public String infixToPostfix(String eqn) {
+//    	String postfix = "";
+//    	String popped = "";
+//    	
+//    	Stack stk = null;
+//    	Node node = null;
+//    	
+//    	String exrn[] = eqn.split("\\s+");{
+//    		for(int i = 0; i<=exrn.length-1;i++) {
+//    			if(!isOperator(exrn[i])) {
+//    				postfix += exrn[i];
+//    			}else if(exrn[i].equals(")")){
+//    				while(!exrn[i].equals("(")) {
+//    					node = pop();
+//    					postfix += exrn[i];
+//    				}else {
+//    					
+//    				}
+//    			}
+//    		}
+//    	}
+//    	return postfix;
+//    }
+
+    static double Prec(char ch) {
+    	if (ch == '+' || ch == '-') return 1;
+    	else if (ch == '*' || ch == '/') return 2;
+    	else if (ch == '^') return 3;
+    	else return 0;
+	}
+    
+    static String infixToPostfix(String exp) {
+		String result = new String("");
+		Stack<Character> stack = new Stack<>();
+		
+		for (int i = 0; i<exp.length(); ++i)
+		{
+			char c = exp.charAt(i);
+			
+			if (Character.isLetterOrDigit(c))
+				result += c;
+			else if (c == '(')
+				stack.push(c);
+			else if (c == ')')
+			{
+				while (!stack.isEmpty() && stack.peek() != '(')
+					result += stack.pop();
+				
+				if (!stack.isEmpty() && stack.peek() != '(')
+					return "Invalid Expression"; 	 
+				else
+					stack.pop();
+			}
+			else
+			{
+				while (!stack.isEmpty() && Prec(c) <= Prec(stack.peek()))
+					result += stack.pop();
+				stack.push(c);
+			}
+	
+		}
+		while (!stack.isEmpty())
+			result += stack.pop();
+	
+		return result;
+	}
+    
+    
+    public Stack addToMemory(String eqn) {
+		Stack<String> memory = new Stack<>();
+		        
+		String post[] = eqn.split("\\s+");
+		for (int i=0;i<post.length;i++) {
+			memory.push(post[i]);
+		}
+		return memory;
+    }
+    
+    public Stack clearMemory(Stack memory) {
+    	while(!memory.isEmpty()) {
+    		memory.pop();
+    	}
+    	return memory;
+    }
+    
+    public void writeToFile(String eqn) {
+    	try {
+    		FileWriter add = new FileWriter("calc-files.txt", true);
+    		add.write(eqn);
+    		add.close();
+    	}catch(IOException e) {
+    		System.out.println("File Not Found");
+    		e.printStackTrace();
+    	}
     }
 }
