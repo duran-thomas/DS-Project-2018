@@ -39,6 +39,8 @@ public class CalcMain {
 	private JButton button_17;
 	private JButton button_18;
 	String val = null;
+	ExpressionTree tree = new ExpressionTree();
+	Node node;
 
 	/**
 	 * Launch the application.
@@ -287,20 +289,28 @@ public class CalcMain {
 		comboBox.setBounds(10, 83, 95, 25);
 		frame.getContentPane().add(comboBox);
 		
-		button_10 = new JButton("=");
-		button_10.addActionListener(new ActionListener() {
+		
+		
+		JButton btnEqual = new JButton("=");
+		btnEqual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ExpressionTree tree = null;
-				Node node = null;
-				
-				String eqn = screen.getText();
-				node = tree.buildPostfixTree(eqn);
-				tree.inOrder(node);
-				System.out.printf("Result: %.1f", tree.evaluate(node));
+				if(comboBox.getSelectedItem().equals("Postfix")) {
+					String eqn = screen.getText();
+					node = tree.buildPostfixTree(eqn);
+					
+					StringBuilder str = new StringBuilder();
+					String result = String.format("%.2f", tree.evaluate(node));
+					str.append(result);
+					String result2 = str.toString();
+					
+					screen.setText(result2);
+				}else {
+					System.out.println("Incorrect Format");
+				}
 			}
 		});
-		button_10.setBounds(165, 265, 45, 25);
-		frame.getContentPane().add(button_10);
+		btnEqual.setBounds(165, 265, 45, 25);
+		frame.getContentPane().add(btnEqual);
 		
 		JButton button = new JButton("M");
 		button.setBounds(10, 120, 45, 25);
