@@ -1,3 +1,6 @@
+//Name: Duran Thomas
+//ID: 1401134
+
 package Backend;
 
 import java.util.*;
@@ -206,6 +209,11 @@ public class ExpressionTree {
     	while(!memory.isEmpty()) {
     		memory.pop();
     	}
+    	return memory;
+    }
+    
+    public Stack<String> clearLastElemet(Stack<String> memory){
+    	memory.pop();
     	return memory;
     }
     

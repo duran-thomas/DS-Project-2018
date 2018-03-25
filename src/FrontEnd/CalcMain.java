@@ -1,4 +1,8 @@
+//Name: Duran Thomas
+//ID: 1401134
+
 package FrontEnd;
+import Backend.*;
 
 import java.awt.EventQueue;
 
@@ -7,11 +11,14 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.SwingConstants;
 
 public class CalcMain {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField screen;
 	private JButton button_1;
 	private JButton button_2;
 	private JButton button_3;
@@ -31,7 +38,7 @@ public class CalcMain {
 	private JButton button_16;
 	private JButton button_17;
 	private JButton button_18;
-	private JButton button_19;
+	String val = null;
 
 	/**
 	 * Launch the application.
@@ -59,144 +66,180 @@ public class CalcMain {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void initialize() {
 		frame = new JFrame("HP-35");
-		frame.setBounds(100, 100, 235, 340);
+		frame.setBounds(100, 100, 300, 340);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 22, 200, 50);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		screen = new JTextField();
+		screen.setHorizontalAlignment(SwingConstants.RIGHT);
+		screen.setBounds(10, 22, 200, 50);
+		frame.getContentPane().add(screen);
+		screen.setColumns(10);
 		
-		JButton button = new JButton("7");
-		button.addActionListener(new ActionListener() {
+		JButton btn7 = new JButton("7");
+		btn7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				val = screen.getText() + btn7.getText();
+				screen.setText(val);
 			}
 		});
-		button.setBounds(10, 156, 45, 25);
-		frame.getContentPane().add(button);
+		btn7.setBounds(10, 156, 45, 25);
+		frame.getContentPane().add(btn7);
 		
-		button_1 = new JButton("8");
-		button_1.addActionListener(new ActionListener() {
+		JButton btn8 = new JButton("8");
+		btn8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btn8.getText();
+				screen.setText(val);
 			}
 		});
-		button_1.setBounds(60, 156, 45, 25);
-		frame.getContentPane().add(button_1);
+		btn8.setBounds(60, 156, 45, 25);
+		frame.getContentPane().add(btn8);
 		
-		button_2 = new JButton("9");
-		button_2.addActionListener(new ActionListener() {
+		JButton btn9 = new JButton("9");
+		btn9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btn9.getText();
+				screen.setText(val);
 			}
 		});
-		button_2.setBounds(110, 156, 45, 25);
-		frame.getContentPane().add(button_2);
+		btn9.setBounds(110, 156, 45, 25);
+		frame.getContentPane().add(btn9);
 		
-		button_3 = new JButton("4");
-		button_3.addActionListener(new ActionListener() {
+		JButton btn4 = new JButton("4");
+		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btn4.getText();
+				screen.setText(val);
 			}
 		});
-		button_3.setBounds(10, 192, 45, 25);
-		frame.getContentPane().add(button_3);
+		btn4.setBounds(10, 192, 45, 25);
+		frame.getContentPane().add(btn4);
 		
-		button_4 = new JButton("5");
-		button_4.addActionListener(new ActionListener() {
+		JButton btn5 = new JButton("5");
+		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btn5.getText();
+				screen.setText(val);
 			}
 		});
-		button_4.setBounds(60, 192, 45, 25);
-		frame.getContentPane().add(button_4);
+		btn5.setBounds(60, 192, 45, 25);
+		frame.getContentPane().add(btn5);
 		
-		button_5 = new JButton("6");
-		button_5.addActionListener(new ActionListener() {
+		JButton btn6 = new JButton("6");
+		btn6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btn6.getText();
+				screen.setText(val);
 			}
 		});
-		button_5.setBounds(110, 192, 45, 25);
-		frame.getContentPane().add(button_5);
+		btn6.setBounds(110, 192, 45, 25);
+		frame.getContentPane().add(btn6);
 		
-		button_6 = new JButton("3");
-		button_6.addActionListener(new ActionListener() {
+		JButton btn3 = new JButton("3");
+		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btn3.getText();
+				screen.setText(val);
 			}
 		});
-		button_6.setBounds(110, 228, 45, 25);
-		frame.getContentPane().add(button_6);
+		btn3.setBounds(110, 228, 45, 25);
+		frame.getContentPane().add(btn3);
 		
-		button_7 = new JButton("2");
-		button_7.addActionListener(new ActionListener() {
+		JButton btn2 = new JButton("2");
+		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btn2.getText();
+				screen.setText(val);
 			}
 		});
-		button_7.setBounds(60, 228, 45, 25);
-		frame.getContentPane().add(button_7);
+		btn2.setBounds(60, 228, 45, 25);
+		frame.getContentPane().add(btn2);
 		
-		button_8 = new JButton("1");
-		button_8.addActionListener(new ActionListener() {
+		JButton btn1 = new JButton("1");
+		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btn1.getText();
+				screen.setText(val);
 			}
 		});
-		button_8.setBounds(10, 228, 45, 25);
-		frame.getContentPane().add(button_8);
+		btn1.setBounds(10, 228, 45, 25);
+		frame.getContentPane().add(btn1);
 		
-		btnNewButton = new JButton("0");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btn0 = new JButton("0");
+		btn0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btn0.getText();
+				screen.setText(val);
 			}
 		});
-		btnNewButton.setBounds(10, 264, 95, 25);
-		frame.getContentPane().add(btnNewButton);
+		btn0.setBounds(10, 264, 95, 25);
+		frame.getContentPane().add(btn0);
 		
-		button_9 = new JButton(".");
-		button_9.addActionListener(new ActionListener() {
+		JButton btnPoint = new JButton(".");
+		btnPoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btnPoint.getText();
+				screen.setText(val);
 			}
 		});
-		button_9.setBounds(110, 264, 45, 25);
-		frame.getContentPane().add(button_9);
+		btnPoint.setBounds(110, 264, 45, 25);
+		frame.getContentPane().add(btnPoint);
 		
-		button_10 = new JButton("=");
-		button_10.addActionListener(new ActionListener() {
+		JButton btnPlus = new JButton("+");
+		btnPlus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btnPlus.getText();
+				screen.setText(val);
 			}
 		});
-		button_10.setBounds(165, 265, 45, 25);
-		frame.getContentPane().add(button_10);
+		btnPlus.setBounds(165, 229, 45, 25);
+		frame.getContentPane().add(btnPlus);
 		
-		button_11 = new JButton("+");
-		button_11.addActionListener(new ActionListener() {
+		JButton btnSub = new JButton("-");
+		btnSub.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btnSub.getText();
+				screen.setText(val);
 			}
 		});
-		button_11.setBounds(165, 229, 45, 25);
-		frame.getContentPane().add(button_11);
+		btnSub.setBounds(165, 193, 45, 25);
+		frame.getContentPane().add(btnSub);
 		
-		button_12 = new JButton("-");
-		button_12.addActionListener(new ActionListener() {
+		JButton btnTimes = new JButton("*");
+		btnTimes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btnTimes.getText();
+				screen.setText(val);
 			}
 		});
-		button_12.setBounds(165, 193, 45, 25);
-		frame.getContentPane().add(button_12);
+		btnTimes.setBounds(165, 157, 45, 25);
+		frame.getContentPane().add(btnTimes);
 		
-		button_13 = new JButton("*");
-		button_13.addActionListener(new ActionListener() {
+		JButton btnDivide = new JButton("/");
+		btnDivide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				val = screen.getText() + btnDivide.getText();
+				screen.setText(val);
 			}
 		});
-		button_13.setBounds(165, 157, 45, 25);
-		frame.getContentPane().add(button_13);
+		btnDivide.setBounds(165, 121, 45, 25);
+		frame.getContentPane().add(btnDivide);
 		
-		button_14 = new JButton("/");
-		button_14.addActionListener(new ActionListener() {
+		JButton space = new JButton("\u2423");
+		space.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//Start From Here
+				//val = screen.getText() + space.key
+				screen.setText(val);
 			}
 		});
-		button_14.setBounds(165, 121, 45, 25);
-		frame.getContentPane().add(button_14);
+		space.setBounds(220, 157, 54, 25);
+		frame.getContentPane().add(space);
 		
 		button_15 = new JButton("C");
 		button_15.addActionListener(new ActionListener() {
@@ -211,15 +254,23 @@ public class CalcMain {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		button_16.setBounds(60, 119, 45, 25);
+		button_16.setBounds(60, 121, 45, 25);
 		frame.getContentPane().add(button_16);
 		
-		button_17 = new JButton("M");
+		button_17 = new JButton("\uF0E7");
 		button_17.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String backSpace = null;
+				
+				if(screen.getText().length() > 0) {
+					StringBuilder str = new StringBuilder(screen.getText());
+					str.deleteCharAt(screen.getText().length() -1);
+					backSpace = str.toString();
+					screen.setText(backSpace);
+				}
 			}
 		});
-		button_17.setBounds(10, 119, 45, 25);
+		button_17.setBounds(220, 121, 54, 25);
 		frame.getContentPane().add(button_17);
 		
 		button_18 = new JButton("F");
@@ -227,15 +278,33 @@ public class CalcMain {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		button_18.setBounds(10, 83, 95, 25);
+		button_18.setBounds(110, 83, 100, 25);
 		frame.getContentPane().add(button_18);
 		
-		button_19 = new JButton("X");
-		button_19.addActionListener(new ActionListener() {
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Postfix", "Infix"}));
+		comboBox.setBounds(10, 83, 95, 25);
+		frame.getContentPane().add(comboBox);
+		
+		button_10 = new JButton("=");
+		button_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ExpressionTree tree = null;
+				Node node = null;
+				
+				String eqn = screen.getText();
+				node = tree.buildPostfixTree(eqn);
+				tree.inOrder(node);
+				System.out.printf("Result: %.1f", tree.evaluate(node));
 			}
 		});
-		button_19.setBounds(110, 83, 99, 25);
-		frame.getContentPane().add(button_19);
+		button_10.setBounds(165, 265, 45, 25);
+		frame.getContentPane().add(button_10);
+		
+		JButton button = new JButton("M");
+		button.setBounds(10, 120, 45, 25);
+		frame.getContentPane().add(button);
+		
 	}
 }
