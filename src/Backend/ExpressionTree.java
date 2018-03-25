@@ -148,65 +148,6 @@ public class ExpressionTree {
     	return tree;
     }
     
-//    public static int precedence(String str) {
-//
-//    	if (str.equals("+") || str.equals("-")) return 1;
-//        else if (str.equals("*") || str.equals("/")) return 2;
-//        else if (str.equals("^")) return 3;
-//        else return 0;
-//    }
-    
-//    public String infixToPostfix(String infix) {
-//    	String postfix = "";
-//    	
-//    	Stack<String> stk = new Stack<>();
-//    	String post[] = infix.split("\\s+");
-//    	for(int i = 0; i<post.length;i++) {
-//    		if(!isOperator(post[i]))
-//    			postfix += post[i];
-//    		else if(post[i].equals("(")) 
-//    			stk.push(post[i]);
-//    		else if {
-//    			while(!stk.isEmpty() && stk.peek() != "(")
-//    				postfix += stk.pop();
-//    			if(!stk.isEmpty() && stk.peek() != "(")
-//    				return "Invalid Expression";
-//    			else
-//    				stk.pop();
-//    		}else {
-//    			while (!stk.isEmpty() && precedence(post[i] <= precedence(stk.peek())))
-//    				postfix += stk.pop();
-//    			stk.push(post[i]);
-//    		}
-//    	}
-//   	
-//    	return postfix;
-//    }
-    
-//    public String infixToPostfix(String eqn) {
-//    	String postfix = "";
-//    	String popped = "";
-//    	
-//    	Stack stk = null;
-//    	Node node = null;
-//    	
-//    	String exrn[] = eqn.split("\\s+");{
-//    		for(int i = 0; i<=exrn.length-1;i++) {
-//    			if(!isOperator(exrn[i])) {
-//    				postfix += exrn[i];
-//    			}else if(exrn[i].equals(")")){
-//    				while(!exrn[i].equals("(")) {
-//    					node = pop();
-//    					postfix += exrn[i];
-//    				}else {
-//    					
-//    				}
-//    			}
-//    		}
-//    	}
-//    	return postfix;
-//    }
-
     static double Prec(char ch) {
     	if (ch == '+' || ch == '-') return 1;
     	else if (ch == '*' || ch == '/') return 2;
@@ -251,7 +192,7 @@ public class ExpressionTree {
 	}
     
     
-    public Stack addToMemory(String eqn) {
+    public Stack<String> addToMemory(String eqn) {
 		Stack<String> memory = new Stack<>();
 		        
 		String post[] = eqn.split("\\s+");
@@ -261,7 +202,7 @@ public class ExpressionTree {
 		return memory;
     }
     
-    public Stack clearMemory(Stack memory) {
+    public Stack<String> clearMemory(Stack<String> memory) {
     	while(!memory.isEmpty()) {
     		memory.pop();
     	}
