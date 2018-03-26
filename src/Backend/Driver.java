@@ -1,3 +1,7 @@
+//Name: Duran Thomas
+//ID: 1401134
+
+
 package Backend;
 
 import java.util.*;
@@ -27,6 +31,7 @@ public class Driver {
         mem = testTree.addToMemory(postfix);
         
         System.out.println("View Memory: " + mem);
+        System.out.println(mem.lastElement());
         
         System.out.println("After Memory Clear: " + testTree.clearMemory(mem));
         testTree.writeToFile(postfix + "\n");

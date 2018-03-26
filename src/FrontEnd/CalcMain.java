@@ -7,6 +7,7 @@ import Backend.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -14,26 +15,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
+import java.util.*;
 
 public class CalcMain {
 
 	private JFrame frame;
 	private JTextField screen;
-	private JButton button_1;
-	private JButton button_2;
-	private JButton button_3;
-	private JButton button_4;
-	private JButton button_5;
-	private JButton button_6;
-	private JButton button_7;
-	private JButton button_8;
-	private JButton btnNewButton;
-	private JButton button_9;
-	private JButton button_10;
-	private JButton button_11;
-	private JButton button_12;
-	private JButton button_13;
-	private JButton button_14;
+
 	private JButton button_15;
 	private JButton button_16;
 	private JButton button_17;
@@ -41,6 +29,7 @@ public class CalcMain {
 	String val = null;
 	ExpressionTree tree = new ExpressionTree();
 	Node node;
+	Stack<String> stk = new Stack<>();
 
 	/**
 	 * Launch the application.
@@ -71,13 +60,13 @@ public class CalcMain {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void initialize() {
 		frame = new JFrame("HP-35");
-		frame.setBounds(100, 100, 300, 340);
+		frame.setBounds(100, 100, 235, 326);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		screen = new JTextField();
 		screen.setHorizontalAlignment(SwingConstants.RIGHT);
-		screen.setBounds(10, 22, 200, 50);
+		screen.setBounds(10, 11, 200, 50);
 		frame.getContentPane().add(screen);
 		screen.setColumns(10);
 		
@@ -88,7 +77,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btn7.setBounds(10, 156, 45, 25);
+		btn7.setBounds(10, 145, 45, 25);
 		frame.getContentPane().add(btn7);
 		
 		JButton btn8 = new JButton("8");
@@ -98,7 +87,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btn8.setBounds(60, 156, 45, 25);
+		btn8.setBounds(60, 145, 45, 25);
 		frame.getContentPane().add(btn8);
 		
 		JButton btn9 = new JButton("9");
@@ -108,7 +97,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btn9.setBounds(110, 156, 45, 25);
+		btn9.setBounds(110, 145, 45, 25);
 		frame.getContentPane().add(btn9);
 		
 		JButton btn4 = new JButton("4");
@@ -118,7 +107,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btn4.setBounds(10, 192, 45, 25);
+		btn4.setBounds(10, 181, 45, 25);
 		frame.getContentPane().add(btn4);
 		
 		JButton btn5 = new JButton("5");
@@ -128,7 +117,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btn5.setBounds(60, 192, 45, 25);
+		btn5.setBounds(60, 181, 45, 25);
 		frame.getContentPane().add(btn5);
 		
 		JButton btn6 = new JButton("6");
@@ -138,7 +127,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btn6.setBounds(110, 192, 45, 25);
+		btn6.setBounds(110, 181, 45, 25);
 		frame.getContentPane().add(btn6);
 		
 		JButton btn3 = new JButton("3");
@@ -148,7 +137,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btn3.setBounds(110, 228, 45, 25);
+		btn3.setBounds(110, 217, 45, 25);
 		frame.getContentPane().add(btn3);
 		
 		JButton btn2 = new JButton("2");
@@ -158,7 +147,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btn2.setBounds(60, 228, 45, 25);
+		btn2.setBounds(60, 217, 45, 25);
 		frame.getContentPane().add(btn2);
 		
 		JButton btn1 = new JButton("1");
@@ -168,7 +157,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btn1.setBounds(10, 228, 45, 25);
+		btn1.setBounds(10, 217, 45, 25);
 		frame.getContentPane().add(btn1);
 		
 		JButton btn0 = new JButton("0");
@@ -178,7 +167,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btn0.setBounds(10, 264, 95, 25);
+		btn0.setBounds(10, 253, 45, 25);
 		frame.getContentPane().add(btn0);
 		
 		JButton btnPoint = new JButton(".");
@@ -188,7 +177,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btnPoint.setBounds(110, 264, 45, 25);
+		btnPoint.setBounds(60, 253, 45, 25);
 		frame.getContentPane().add(btnPoint);
 		
 		JButton btnPlus = new JButton("+");
@@ -198,7 +187,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btnPlus.setBounds(165, 229, 45, 25);
+		btnPlus.setBounds(165, 216, 45, 25);
 		frame.getContentPane().add(btnPlus);
 		
 		JButton btnSub = new JButton("-");
@@ -208,7 +197,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btnSub.setBounds(165, 193, 45, 25);
+		btnSub.setBounds(165, 180, 45, 25);
 		frame.getContentPane().add(btnSub);
 		
 		JButton btnTimes = new JButton("*");
@@ -218,7 +207,7 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btnTimes.setBounds(165, 157, 45, 25);
+		btnTimes.setBounds(165, 108, 45, 25);
 		frame.getContentPane().add(btnTimes);
 		
 		JButton btnDivide = new JButton("/");
@@ -228,35 +217,65 @@ public class CalcMain {
 				screen.setText(val);
 			}
 		});
-		btnDivide.setBounds(165, 121, 45, 25);
+		btnDivide.setBounds(165, 144, 45, 25);
 		frame.getContentPane().add(btnDivide);
 		
 		JButton space = new JButton("\u2423");
 		space.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//Start From Here
-				//val = screen.getText() + space.key
+				val = screen.getText() + " ";
 				screen.setText(val);
 			}
 		});
-		space.setBounds(220, 157, 54, 25);
+		space.setBounds(110, 253, 45, 25);
 		frame.getContentPane().add(space);
+		
+		JButton button = new JButton("M");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(stk.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Memory Is Empty", "Error",
+	                        JOptionPane.ERROR_MESSAGE);
+					screen.setText(null);
+				}else {
+					String data = stk.lastElement().toString();
+					screen.setText(data);
+				}
+			}
+		});
+		button.setBounds(10, 109, 45, 25);
+		frame.getContentPane().add(button);
 		
 		button_15 = new JButton("C");
 		button_15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(stk.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Memory Is Empty", "Error",
+	                        JOptionPane.ERROR_MESSAGE);
+					screen.setText(null);
+				}else {
+					tree.clearMemory(stk);
+				}
 			}
 		});
-		button_15.setBounds(110, 120, 45, 25);
+		button_15.setBounds(110, 109, 45, 25);
 		frame.getContentPane().add(button_15);
 		
 		button_16 = new JButton("B");
 		button_16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(stk.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Memory Is Empty", "Error",
+	                        JOptionPane.ERROR_MESSAGE);
+					screen.setText(null);
+				}else {
+					String data = stk.pop();
+					screen.setText(data);
+				}
 			}
 		});
-		button_16.setBounds(60, 121, 45, 25);
+		button_16.setBounds(60, 110, 45, 25);
 		frame.getContentPane().add(button_16);
 		
 		button_17 = new JButton("\uF0E7");
@@ -272,21 +291,25 @@ public class CalcMain {
 				}
 			}
 		});
-		button_17.setBounds(220, 121, 54, 25);
+		button_17.setBounds(110, 72, 45, 25);
 		frame.getContentPane().add(button_17);
 		
 		button_18 = new JButton("F");
 		button_18.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String eqn = screen.getText();
+				tree.writeToFile(eqn + "\n");
+				JOptionPane.showMessageDialog(null, "Saved To File", "Success",
+                        JOptionPane.PLAIN_MESSAGE);
 			}
 		});
-		button_18.setBounds(110, 83, 100, 25);
+		button_18.setBounds(165, 72, 45, 25);
 		frame.getContentPane().add(button_18);
 		
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Postfix", "Infix"}));
-		comboBox.setBounds(10, 83, 95, 25);
+		comboBox.setBounds(10, 72, 95, 25);
 		frame.getContentPane().add(comboBox);
 		
 		
@@ -297,6 +320,7 @@ public class CalcMain {
 				if(comboBox.getSelectedItem().equals("Postfix")) {
 					String eqn = screen.getText();
 					node = tree.buildPostfixTree(eqn);
+					stk = tree.addToMemory(eqn);
 					
 					StringBuilder str = new StringBuilder();
 					String result = String.format("%.2f", tree.evaluate(node));
@@ -309,12 +333,8 @@ public class CalcMain {
 				}
 			}
 		});
-		btnEqual.setBounds(165, 265, 45, 25);
+		btnEqual.setBounds(165, 253, 45, 25);
 		frame.getContentPane().add(btnEqual);
-		
-		JButton button = new JButton("M");
-		button.setBounds(10, 120, 45, 25);
-		frame.getContentPane().add(button);
 		
 	}
 }
