@@ -14,7 +14,7 @@ public class Driver {
         ExpressionTree testTree = new ExpressionTree();
        
         String postfix = ("-72.5 -92.2 +");
-        //String infix = ("7+9+3");
+        String infix = ("7+9+3");
         //String postfix = ("5 10 15 - * 7 +");
 		
         //System.out.println(testTree.infixToPostfix(infix));
@@ -36,6 +36,6 @@ public class Driver {
         System.out.println("After Memory Clear: " + testTree.clearMemory(mem));
         testTree.writeToFile(postfix + "\n");
         
-        
+        System.out.println(testTree.infixToPostfix(infix));
 	}
 }

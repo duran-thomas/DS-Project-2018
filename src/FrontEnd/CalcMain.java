@@ -270,8 +270,10 @@ public class CalcMain {
 	                        JOptionPane.ERROR_MESSAGE);
 					screen.setText(null);
 				}else {
-					String data = stk.pop();
-					screen.setText(data);
+					stk.pop();
+					JOptionPane.showMessageDialog(null, "Success", "Success",
+	                        JOptionPane.PLAIN_MESSAGE);
+					screen.setText(null);
 				}
 			}
 		});
@@ -291,16 +293,21 @@ public class CalcMain {
 				}
 			}
 		});
-		button_17.setBounds(110, 72, 45, 25);
+		button_17.setBounds(104, 72, 51, 25);
 		frame.getContentPane().add(button_17);
 		
 		button_18 = new JButton("F");
 		button_18.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String eqn = screen.getText();
-				tree.writeToFile(eqn + "\n");
-				JOptionPane.showMessageDialog(null, "Saved To File", "Success",
-                        JOptionPane.PLAIN_MESSAGE);
+				if(eqn.equals("") || eqn.equals("")) {
+					JOptionPane.showMessageDialog(null, "Nothing To Save", "Error",
+	                        JOptionPane.ERROR_MESSAGE);
+				}else {
+					tree.writeToFile(eqn + "\n");
+					JOptionPane.showMessageDialog(null, "Saved To File", "Success",
+	                        JOptionPane.PLAIN_MESSAGE);
+				}
 			}
 		});
 		button_18.setBounds(165, 72, 45, 25);
@@ -309,7 +316,7 @@ public class CalcMain {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Postfix", "Infix"}));
-		comboBox.setBounds(10, 72, 95, 25);
+		comboBox.setBounds(10, 72, 87, 25);
 		frame.getContentPane().add(comboBox);
 		
 		
@@ -329,7 +336,15 @@ public class CalcMain {
 					
 					screen.setText(result2);
 				}else {
-					System.out.println("Incorrect Format");
+					String eqn = screen.getText();
+					String postfix = tree.infixToPostfix(eqn);
+					node = tree.buildPostfixTree(postfix);
+					stk = tree.addToMemory(postfix);
+					
+					StringBuilder str = new StringBuilder();
+					String result = String.format(postfix + "\n%.2f", tree.evaluate(node));
+					str.append(result);
+					String result2 = str.toString();
 				}
 			}
 		});

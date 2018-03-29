@@ -8,6 +8,7 @@ public class TreeStack {
 	Node treeNode;
 	TreeStack next;
 	
+	//Stack Constructor
 	public TreeStack(Node treeNode) {
 		this.treeNode = treeNode;
 		next = null;

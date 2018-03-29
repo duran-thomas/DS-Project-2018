@@ -8,6 +8,7 @@ public class Node {
 	public Node left;
 	public Node right;
 	
+	//NNode Constructor
 	public Node(String data) {
 		this.data = data;
 		this.left = null;
