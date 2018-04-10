@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import java.util.*;
+import javax.swing.JLabel;
 
 public class CalcMain {
 
@@ -314,6 +315,8 @@ public class CalcMain {
 		frame.getContentPane().add(button_18);
 		
 		
+		
+		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Postfix", "Infix"}));
 		comboBox.setBounds(10, 72, 87, 25);
@@ -326,15 +329,21 @@ public class CalcMain {
 			public void actionPerformed(ActionEvent e) {
 				if(comboBox.getSelectedItem().equals("Postfix")) {
 					String eqn = screen.getText();
-					node = tree.buildPostfixTree(eqn);
-					stk = tree.addToMemory(eqn);
+					if(eqn.equals("") || eqn.equals("")) {
+						JOptionPane.showMessageDialog(null, "Please Enter A Postfix Expression", "Error",
+		                        JOptionPane.ERROR_MESSAGE);
+					}else {
+						node = tree.buildPostfixTree(eqn);
+						stk = tree.addToMemory(eqn);
+						
+						StringBuilder str = new StringBuilder();
+						String result = String.format("%.2f", tree.evaluate(node));
+						str.append(result);
+						String result2 = str.toString();
+						
+						screen.setText(result2);
+					}
 					
-					StringBuilder str = new StringBuilder();
-					String result = String.format("%.2f", tree.evaluate(node));
-					str.append(result);
-					String result2 = str.toString();
-					
-					screen.setText(result2);
 				}else {
 					String eqn = screen.getText();
 					String postfix = tree.infixToPostfix(eqn);
@@ -342,14 +351,19 @@ public class CalcMain {
 					stk = tree.addToMemory(postfix);
 					
 					StringBuilder str = new StringBuilder();
-					String result = String.format(postfix + "\n%.2f", tree.evaluate(node));
+					String result = String.format(postfix);
 					str.append(result);
-					String result2 = str.toString();
+					screen.setText("%.2f" + tree.evaluate(node));
 				}
 			}
 		});
 		btnEqual.setBounds(165, 253, 45, 25);
 		frame.getContentPane().add(btnEqual);
+		
+		JLabel lblPostfix = new JLabel("HP-35");
+		lblPostfix.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPostfix.setBounds(10, 72, 95, 26);
+		frame.getContentPane().add(lblPostfix);
 		
 	}
 }

@@ -181,14 +181,18 @@ public class ExpressionTree {
 		{
 			char c = exp.charAt(i);
 			
-			if (Character.isLetterOrDigit(c))
+			if (Character.isLetterOrDigit(c)) {
 				result += c;
+				result += " ";
+			}
+				
 			else if (c == '(')
 				stack.push(c);
 			else if (c == ')')
 			{
 				while (!stack.isEmpty() && stack.peek() != '(')
 					result += stack.pop();
+					result += " ";
 				
 				if (!stack.isEmpty() && stack.peek() != '(')
 					return "Invalid Expression"; 	 
@@ -199,12 +203,14 @@ public class ExpressionTree {
 			{
 				while (!stack.isEmpty() && Prec(c) <= Prec(stack.peek()))
 					result += stack.pop();
+					result += " ";
 				stack.push(c);
 			}
 	
 		}
 		while (!stack.isEmpty())
 			result += stack.pop();
+			result += " ";
 	
 		return result;
 	}

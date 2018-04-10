@@ -19,22 +19,22 @@ public class Driver {
 		
         //System.out.println(testTree.infixToPostfix(infix));
         
-        Node test = testTree.buildPostfixTree(postfix);
-		testTree.inOrder(test);
-		System.out.println("");
-		System.out.printf("Result: %.1f", testTree.evaluate(test));
-		
-		System.out.println("\nMemory Function");
-        
-        Stack<String> mem = new Stack<>();
-        
-        mem = testTree.addToMemory(postfix);
-        
-        System.out.println("View Memory: " + mem);
-        System.out.println(mem.lastElement());
-        
-        System.out.println("After Memory Clear: " + testTree.clearMemory(mem));
-        testTree.writeToFile(postfix + "\n");
+//        Node test = testTree.buildPostfixTree(postfix);
+//		testTree.inOrder(test);
+//		System.out.println("");
+//		System.out.printf("Result: %.1f", testTree.evaluate(test));
+//		
+//		System.out.println("\nMemory Function");
+//        
+//        Stack<String> mem = new Stack<>();
+//        
+//        mem = testTree.addToMemory(postfix);
+//        
+//        System.out.println("View Memory: " + mem);
+//        System.out.println(mem.lastElement());
+//        
+//        System.out.println("After Memory Clear: " + testTree.clearMemory(mem));
+//        testTree.writeToFile(postfix + "\n");
         
         System.out.println(testTree.infixToPostfix(infix));
 	}
